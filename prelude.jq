@@ -1,4 +1,4 @@
-
+## Sane JQ Prelude library
 def version:
   [0,1,0]
   ;
