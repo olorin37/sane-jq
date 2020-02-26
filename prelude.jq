@@ -7,6 +7,17 @@ def version_string:
   ;
 
 
+def Or(default):
+  if . == null then
+    default
+  else
+    .
+  end
+  ;
+def Or(value; default):
+  value | Or(default)
+  ;
+
 def is_same_type(lhs; rhs):
   (lhs|type) == (rhs|type)
   ;
