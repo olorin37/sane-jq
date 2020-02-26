@@ -1,0 +1,41 @@
+* QJ kvetch
+
+** [#A] Alternative operator ~//~ misbehaviour
+
+#+BEGIN_SRC jq
+empty // null // false // 5
+  # is ==> 5
+  # should be ==> false
+#+END_SRC
+
+JQ should distinguish between falsy and nully values. Alternative operator
+should replace only nully variables, but not falsy!
+
+** ~isempty~ misleading name
+
+It of course checks if the vaule is ~empty~ value. But it sounds line function
+which works on "collections" and checks if collection is empty.
+
+I do not know any other value ~x~ which will return true for ~ispempty(x)~ other
+than ~empty~. problemtic here is the name 'empty' it shoudl be probably
+'bottom', then the function whould be ~isbottom~.
+
+** Order for ~<~ and ~>~ is based on ~{null, false, true} ∪ Int~
+
+#+BEGIN_SRC jq
+null < 0
+  # is ==> true
+  # shoudl be ==> error("...")
+null < -9999999999999999999
+  # is ==> true
+  # shoudl be ==> error("...")
+null > 0
+  # is ==> false
+  # shoudl be ==> error("...")
+#+END_SRC
+
+Implicit conversion of the ~null~ to ~-∞~ is very error prone approach.
+
+~∀ ∈ Int | null < false < true < n~
+
+** `unique` sorts keys which wrong
