@@ -1,4 +1,5 @@
-## Sane JQ Prelude library
+# Sane JQ Prelude library
+
 def version:
   [0,1,0]
   ;
@@ -7,6 +8,7 @@ def version_string:
   ;
 
 
+## Alternative for alternative operator
 def Or(default):
   if . == null then
     default
@@ -18,10 +20,12 @@ def Or(value; default):
   value | Or(default)
   ;
 
+## Helper for checking type ==
 def is_same_type(lhs; rhs):
   (lhs|type) == (rhs|type)
   ;
 
+## Ordering check
 def lt(lhs; rhs):
   if is_same_type(lhs; rhs) then
     lhs < rhs
